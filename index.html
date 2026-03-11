@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Наталія Сало — Гобелени | Tapestries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#FAF6F1;
+  --bg-warm:#F5EDE3;
+  --bg-card:#FFFCF8;
+  --text:#3D2E1F;
+  --text-light:#8B7355;
+  --text-lighter:#B5A08A;
+  --accent:#A67B5B;
+  --accent-dark:#8B6242;
+  --accent-light:#D4B896;
+  --border:#E8DDD0;
+  --shadow:rgba(61,46,31,0.08);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'IBM Plex Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+  font-weight:300;
+}
+
+/* Texture overlay */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:0.03;
+  background-image:url("data:image/svg+xml,<svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* Lang switcher */
+.lang-bar{
+  position:fixed;
+  top:0;right:0;
+  padding:12px 20px;
+  z-index:100;
+  display:flex;
+  gap:8px;
+}
+.lang-btn{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--text-lighter);
+  background:none;
+  border:1px solid var(--border);
+  padding:4px 10px;
+  border-radius:4px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.lang-btn:hover,.lang-btn.active{
+  color:var(--accent-dark);
+  border-color:var(--accent);
+  background:rgba(166,123,91,0.06);
+}
+
+/* Header */
+.hero{
+  text-align:center;
+  padding:80px 0 48px;
+}
+.hero-line{
+  width:40px;
+  height:1px;
+  background:var(--accent-light);
+  margin:0 auto 20px;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  font-weight:400;
+  color:var(--text);
+  letter-spacing:0.02em;
+  margin-bottom:8px;
+}
+.hero .subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  font-weight:400;
+  font-style:italic;
+  color:var(--text-light);
+  margin-bottom:16px;
+}
+.hero .bio{
+  font-size:14px;
+  color:var(--text-light);
+  max-width:500px;
+  margin:0 auto;
+  line-height:1.7;
+}
+
+/* Divider */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin:48px 0 40px;
+}
+.divider::before,.divider::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--border);
+}
+.divider span{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;
+  font-style:italic;
+  color:var(--text-lighter);
+  letter-spacing:0.15em;
+  text-transform:lowercase;
+}
+
+/* Product card */
+.product{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:32px;
+  box-shadow:0 2px 20px var(--shadow);
+  transition:box-shadow 0.3s;
+}
+.product:hover{
+  box-shadow:0 4px 30px rgba(61,46,31,0.12);
+}
+
+.product-images{
+  display:grid;
+  gap:2px;
+  background:var(--border);
+}
+.product-images.single{grid-template-columns:1fr}
+.product-images.double{grid-template-columns:1fr 1fr}
+.product-images.triple{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.product-images.triple .img-wrap:first-child{grid-row:span 2}
+
+.img-wrap{
+  overflow:hidden;
+  position:relative;
+  background:var(--bg-warm);
+}
+.img-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.6s ease;
+}
+.img-wrap:hover img{transform:scale(1.03)}
+
+.product-body{
+  padding:28px 32px;
+}
+.product-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;
+  font-weight:500;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.product-year{
+  font-size:13px;
+  color:var(--text-lighter);
+  letter-spacing:0.1em;
+  margin-bottom:12px;
+}
+.product-materials{
+  font-size:14px;
+  color:var(--text-light);
+  font-style:italic;
+  margin-bottom:8px;
+}
+.product-size{
+  font-size:14px;
+  color:var(--text-light);
+  margin-bottom:4px;
+}
+.product-note{
+  font-size:13px;
+  color:var(--text-lighter);
+  margin-bottom:16px;
+}
+.product-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;
+  font-weight:500;
+  color:var(--accent-dark);
+}
+
+.product-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn-inquiry{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.08em;
+  color:var(--accent-dark);
+  background:none;
+  border:1px solid var(--accent);
+  padding:8px 20px;
+  border-radius:6px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.btn-inquiry:hover{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* About */
+.about{
+  padding:40px 0;
+  text-align:center;
+}
+.about h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:400;
+  color:var(--text);
+  margin-bottom:16px;
+}
+.about p{
+  font-size:15px;
+  color:var(--text-light);
+  max-width:560px;
+  margin:0 auto 12px;
+  line-height:1.7;
+}
+
+/* Contact */
+.contact{
+  text-align:center;
+  padding:32px 0 64px;
+}
+.contact a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:15px;
+  color:var(--accent-dark);
+  text-decoration:none;
+  padding:12px 24px;
+  border:1px solid var(--accent-light);
+  border-radius:8px;
+  transition:all 0.2s;
+}
+.contact a:hover{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+.contact-note{
+  font-size:13px;
+  color:var(--text-lighter);
+  margin-top:12px;
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding:24px 0;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  color:var(--text-lighter);
+}
+
+/* i18n */
+.i18n-en{display:none}
+body.en .i18n-en{display:initial}
+body.en .i18n-uk{display:none}
+
+@media(max-width:600px){
+  .hero h1{font-size:32px}
+  .product-body{padding:20px}
+  .product-title{font-size:22px}
+  .product-images.double,.product-images.triple{grid-template-columns:1fr}
+  .product-images.triple .img-wrap:first-child{grid-row:auto}
+  .product-footer{flex-direction:column;align-items:flex-start}
+  .hero{padding:60px 0 36px}
+}
+</style>
+</head>
+<body>
+
+<!-- Language switcher -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('uk')">UA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line"></div>
+  <h1>
+    <span class="i18n-uk">Наталія Сало</span>
+    <span class="i18n-en">Nataliia Salo</span>
+  </h1>
+  <div class="subtitle">
+    <span class="i18n-uk">художня ткацтво · гобелени</span>
+    <span class="i18n-en">art weaving · tapestries</span>
+  </div>
+  <div class="bio">
+    <span class="i18n-uk">Авторські гобелени ручної роботи. Натуральні матеріали, природні текстури, тепло кожної нитки.</span>
+    <span class="i18n-en">Handcrafted art tapestries. Natural materials, organic textures, warmth in every thread.</span>
+  </div>
+</div>
+
+<div class="divider">
+  <span class="i18n-uk">роботи</span>
+  <span class="i18n-en">works</span>
+</div>
+
+<!-- PRODUCT 1 -->
+<div class="product">
+  <div class="product-images single">
+    <div class="img-wrap" style="max-height:500px">
+      <img src="product-1/main.jpg" alt="Те що нас оточує">
+    </div>
+  </div>
+  <div class="product-body">
+    <div class="product-title">
+      <span class="i18n-uk">«Те що нас оточує»</span>
+      <span class="i18n-en">"What Surrounds Us"</span>
+    </div>
+    <div class="product-year">2024</div>
+    <div class="product-materials">
+      <span class="i18n-uk">Трикотаж, бавовна, шерсть, акрил</span>
+      <span class="i18n-en">Jersey knit, cotton, wool, acrylic</span>
+    </div>
+    <div class="product-size">100 × 100 cm</div>
+    <div class="product-note">
+      <span class="i18n-uk">Без оформлення</span>
+      <span class="i18n-en">Unframed</span>
+    </div>
+    <div class="product-footer">
+      <div class="product-price">$700</div>
+      <a class="btn-inquiry" href="https://www.instagram.com/natalya.salo/" target="_blank">
+        <span class="i18n-uk">Запитати</span>
+        <span class="i18n-en">Inquire</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="product">
+  <div class="product-images double">
+    <div class="img-wrap" style="max-height:400px">
+      <img src="product-2/main.jpg" alt="Поле">
+    </div>
+    <div class="img-wrap" style="max-height:400px">
+      <img src="product-2/detail.jpg" alt="Поле — деталь">
+    </div>
+  </div>
+  <div class="product-body">
+    <div class="product-title">
+      <span class="i18n-uk">«Поле»</span>
+      <span class="i18n-en">"Field"</span>
+    </div>
+    <div class="product-year">2026</div>
+    <div class="product-materials">
+      <span class="i18n-uk">Мішковина, бавовна, шовк, шерсть, акрил</span>
+      <span class="i18n-en">Burlap, cotton, silk, wool, acrylic</span>
+    </div>
+    <div class="product-size">25 × 25 cm</div>
+    <div class="product-footer">
+      <div class="product-price">$100</div>
+      <a class="btn-inquiry" href="https://www.instagram.com/natalya.salo/" target="_blank">
+        <span class="i18n-uk">Запитати</span>
+        <span class="i18n-en">Inquire</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="product">
+  <div class="product-images triple">
+    <div class="img-wrap" style="max-height:400px">
+      <img src="product-3/main.jpg" alt="Шлях">
+    </div>
+    <div class="img-wrap" style="max-height:200px">
+      <img src="product-3/detail.jpg" alt="Шлях — деталь">
+    </div>
+    <div class="img-wrap" style="max-height:200px">
+      <img src="product-3/context.jpg" alt="Шлях — в інтер'єрі">
+    </div>
+  </div>
+  <div class="product-body">
+    <div class="product-title">
+      <span class="i18n-uk">«Шлях»</span>
+      <span class="i18n-en">"Path"</span>
+    </div>
+    <div class="product-year">2026</div>
+    <div class="product-materials">
+      <span class="i18n-uk">Бавовна, шовк, шерсть, акрил</span>
+      <span class="i18n-en">Cotton, silk, wool, acrylic</span>
+    </div>
+    <div class="product-size">20 × 20 cm</div>
+    <div class="product-footer">
+      <div class="product-price">$40</div>
+      <a class="btn-inquiry" href="https://www.instagram.com/natalya.salo/" target="_blank">
+        <span class="i18n-uk">Запитати</span>
+        <span class="i18n-en">Inquire</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="divider">
+  <span class="i18n-uk">про автора</span>
+  <span class="i18n-en">about</span>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+  <h2>
+    <span class="i18n-uk">Наталія Сало</span>
+    <span class="i18n-en">Nataliia Salo</span>
+  </h2>
+  <p class="i18n-uk">
+    Народилась у 1997 році. Створює авторські гобелени, поєднуючи традиційну техніку ткацтва з сучасним художнім баченням. Кожна робота — це унікальний світ текстур, кольорів та матеріалів.
+  </p>
+  <p class="i18n-en">
+    Born in 1997. Creates original tapestries, combining traditional weaving technique with contemporary artistic vision. Each work is a unique world of textures, colors and materials.
+  </p>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+  <a href="https://www.instagram.com/natalya.salo/" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+    @natalya.salo
+  </a>
+  <div class="contact-note">
+    <span class="i18n-uk">Напишіть для замовлення або питань</span>
+    <span class="i18n-en">Write for orders or inquiries</span>
+  </div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="i18n-uk">© 2026 Наталія Сало. Всі права захищені.</span>
+  <span class="i18n-en">© 2026 Nataliia Salo. All rights reserved.</span>
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.className = lang === 'en' ? 'en' : '';
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'EN' : 'UA'));
+  });
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+}
+
+// Restore language preference
+const saved = localStorage.getItem('lang');
+if (saved) setLang(saved);
+</script>
+</body>
+</html>
