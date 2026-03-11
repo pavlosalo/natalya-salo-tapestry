@@ -65,10 +65,12 @@ body::before{
   color:var(--text-lighter);
   background:none;
   border:1px solid var(--border);
-  padding:4px 10px;
+  padding:10px 14px;
   border-radius:4px;
   cursor:pointer;
   transition:all 0.2s;
+  min-width:44px;
+  min-height:44px;
 }
 .lang-btn:hover,.lang-btn.active{
   color:var(--accent-dark);
@@ -226,11 +228,14 @@ body::before{
   color:var(--accent-dark);
   background:none;
   border:1px solid var(--accent);
-  padding:8px 20px;
+  padding:12px 24px;
   border-radius:6px;
   cursor:pointer;
   text-decoration:none;
   transition:all 0.2s;
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
 }
 .btn-inquiry:hover{
   background:var(--accent);
